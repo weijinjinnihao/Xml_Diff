@@ -47,51 +47,74 @@ def downloadFile(ip, srcpath, username, password, port, localpath, name):
     scp.close()
 
 
-def getarray(ip, str2, username, password, port, path, localpath, destpath, name):
-    downloadFile(ip, str2, username, password, port, localpath, name)
+def getarray(ip, string, username, password, port, path, localpath, destpath, name):
+    downloadFile(ip, string, username, password, port, localpath, name)
     parseToXML(path, destpath)
     return readXml(destpath)
 
 
-def getname(ip, shell, username, password, port, n):
+def getname(ip, shell, username, password, port):
     n = execs(ip, "find / -name edits_inprogress_*", username, password, port)
-    array = n.split("/")
-    return n, array[len(array) - 1]
+    return n
 
-
-def get_str(ips, username, password, port):
-    ips=[]
+def get_str(ip, username, password, port):
     n=[]
     name=[]
     path=[]
+    string=[]
     destpath=["/home/a.xml","/home/b.xml","/home/c.xml"]
-
-    for ip in ips:
-        n,name = getname(ip,"find / -name edits_inprogress_*", username, password, port, n)
-
+    for i in range(len(ip)):
+        n.append(getname(ip[i],"find / -name edits_inprogress_*", username, password, port))
+    for l in (n):
+        array=l.split("/")
+        name.append(array[len(array) - 1])
+    for i in range(len(n)):
+        path.append("/home/path" + name[i])
+        string.append(getarray(ip[i], n[i], username, password, port, path[i], "/home/a/", destpath[i], name[i]))
     for l in n:
         print(l)
-    for i in (len(ips[])-1)：
-        path[i]= "/home/path" + name[i]
-        str[i]=getarray(ip[i],n[i],username, password, port, path1, "/home/a/", destpath1, name1)
-    path1 = "/home/a/" + name1
-    destpath1 = "/home/a.xml"
-    path2 = "/home/b/" + name2
-    destpath2 = "/home/b.xml"
-    path3 = "/home/c/" + name3
-    destpath3 = "/home/c.xml"
-    str1 = getarray(ip1, n1, username, password, port, path1, "/home/a/", destpath1, name1)
-    str2 = getarray(ip2, n2, username, password, port, path2, "/home/b/", destpath2, name2)
-    str3 = getarray(ip3, n3, username, password, port, path3, "/home/c/", destpath3, name3)
 
-# if __name__ == '__main__':
-#     ip1 = '192.168.0.41'
-#     ip2 = '192.168.0.42'
-#     ip3 = '192.168.0.44'
-#     username = 'root'
-#     password = '111111'
-#     port = 22
-#     interval = 5
-#     Get_File.run(interval,get3str(ip1,ip2,ip3, username, password, port))
+#     path1 = "/home/a/" + name1
+#     destpath1 = "/home/a.xml"
+#     path2 = "/home/b/" + name2
+#     destpath2 = "/home/b.xml"
+#     path3 = "/home/c/" + name3
+#     destpath3 = "/home/c.xml"
+#     str1 = getarray(ip1, n1, username, password, port, path1, "/home/a/", destpath1, name1)
+#     str2 = getarray(ip2, n2, username, password, port, path2, "/home/b/", destpath2, name2)
+#     str3 = getarray(ip3, n3, username, password, port, path3, "/home/c/", destpath3, name3)
+
+if __name__ == '__main__':
+    ip1 = '192.168.0.41'
+    ip2 = '192.168.0.42'
+    ip3 = '192.168.0.44'
+
+
+    username = 'root'
+    password = '111111'
+    port = 22
+    ip=[]
+    get_ip=input("Which ip?:")
+    get_ip =get_ip.split(",")
+    print(len(get_ip))
+    for l in get_ip:
+        if (l=="ip1"):
+            ip.append(ip1)
+        if (l=="ip2"):
+            ip.append(ip2)
+        if (l=="ip3"):
+            ip.append(ip3)
+    for i in range(len(ip)):
+        print(ip[i])
+
+    # path=[]
+    # destpath = ["/home/a.xml", "/home/b.xml", "/home/c.xml"]
+    #
+    # for i in range(len(ip)):
+    #     path.append("/home/path")
+    #     # str[i] = getarray(ip[i], n[i], username, password, port, path[i], "/home/a/", destpath[i], name[i])
+    # for l in path:
+    #     print(l)
+    get_str(ip, username, password, port)
 
 
