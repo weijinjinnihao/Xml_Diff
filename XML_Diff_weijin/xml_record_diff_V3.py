@@ -6,6 +6,7 @@
 
 import xml.etree.ElementTree as ET
 import time
+import ssh
 
 # sorry for using global
 # since it is easier to add this feature
@@ -313,22 +314,29 @@ def compare_files_by_records(file1_list, file2_list):
 
 
 if __name__ == '__main__':
-    node1_name = "NN41"  # file1
-    node2_name = "NN42" # file2
+    ip1 = '192.168.0.41'
+    ip2 = '192.168.0.42'
+    ip3 = '192.168.0.44'
+    username = 'root'
+    password = '111111'
+    port = 22
+    ssh.get3str(ip1,ip2,ip3, username, password, port)
+    node1_name = input("node1:")  # file1
+    node2_name = input("node2:")  # file2
 
     if node1_name == "NN41":
-        file1 = "a.xml"
+        file1 = "/home/a.xml"
     elif node1_name == "NN42":
-        file1 = "b.xml"
+        file1 = "/home/b.xml"
     elif node1_name == "NN44":
-        file1 = "c.xml"
+        file1 = "/home/c.xml"
 
     if node2_name == "NN41":
-        file2 = "a.xml"
+        file2 = "/home/a.xml"
     elif node2_name == "NN42":
-        file2 = "b.xml"
+        file2 = "/home/b.xml"
     elif node2_name == "NN44":
-        file2 = "c.xml"
+        file2 = "/home/c.xml"
 
     To_see_record_same = input("Do you want to see the same Tags? [y/n]")
 
