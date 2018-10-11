@@ -1,8 +1,0 @@
-    The length of Record of NN41: 27600
-    The range of Record's TXID of NN41: [1,27600]
-    
-
-    The length of Record of NN42: 27599
-    The range of Record's TXID of NN41:[1,27599]
-    The length of Record of NN44: 27599
-    The range of Record's TXID of NN44:[1,27599]
