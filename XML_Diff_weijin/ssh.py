@@ -59,15 +59,15 @@ def get3str(ip1,ip2,ip3, username, password, port):
     # print(n2)
     # print(n3)
     # print(name1)
-    path1 = "/home/a/"+name1
-    destpath1 = "/home/a.xml"
-    path2="/home/b/"+name2
-    destpath2 = "/home/b.xml"
-    path3="/home/c/"+name3
-    destpath3 = "/home/c.xml"
-    str1 = getarray(ip1, n1, username, password, port, path1, "/home/a/",destpath1,name1)
-    str2 = getarray(ip2, n2,username, password, port, path2, "/home/b/",destpath2,name2)
-    str3 = getarray(ip3, n3,username, password, port, path3, "/home/c/",destpath3,name3)
+    path1 ="/home/weijin/nn1_41/"+name1
+    destpath1 = "/home/weijin/nn1_41.xml"
+    path2="/home/weijin/nn2_42/"+name2
+    destpath2 = "/home/weijin/nn2_42.xml"
+    path3="/home/weijin/nn3_44/"+name3
+    destpath3 = "/home/weijin/nn3_44.xml"
+    str1 = getarray(ip1, n1, username, password, port, path1, "/home/weijin/nn1_41/",destpath1,name1)
+    str2 = getarray(ip2, n2,username, password, port, path2, "/home/weijin/nn2_42/",destpath2,name2)
+    str3 = getarray(ip3, n3,username, password, port, path3, "/home/weijin/nn3_44/",destpath3,name3)
     
 
 

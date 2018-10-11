@@ -146,14 +146,14 @@ if __name__ == '__main__':
     username = 'root'
     password = '111111'
     port = 22
-    # ssh.get3str(ip1,ip2,ip3, username, password, port)
+    ssh.get3str(ip1,ip2,ip3, username, password, port)
 
     node1_name = "NN41"
     node2_name = "NN42"
     node3_name = "NN44"
-    file1 = "a.xml"
-    file2 = "b.xml"
-    file3 = "c.xml"
+    file1 = "/home/weijin/nn1_41.xml"
+    file2 = "/home/weijin/nn2_42.xml"
+    file3 = "/home/weijin/nn3_44.xml"
 
 
     file1_list = getXmlData(file1)
@@ -170,19 +170,21 @@ if __name__ == '__main__':
 
 
 
-    result.append(["    The length of Record of " + node1_name + ": " + str(len1)])
-    result.append(["    The range of Record's TXID of " + node1_name + ": " + "[" + file1_list[0][3][1] + "," +
-                   file1_list[-1][3][1] + "]"])
-    result.append(["    \n"])
-    result.append(["    The length of Record of " + node2_name + ": " + str(len2)])
-    result.append(["    The range of Record's TXID of " + node1_name + ":" + "[" + file2_list[0][3][1] + "," +
-                   file2_list[-1][3][1] + "]"])
-    result.append(["    \n"])
-    result.append(["    The length of Record of " + node3_name + ": " + str(len2)])
-    result.append(["    The range of Record's TXID of " + node3_name + ":" + "[" + file2_list[0][3][1] + "," +
-                   file2_list[-1][3][1] + "]"])
+    result.append("The length of Record of " + node1_name + ": " + str(len1))
+
+    result.append("The range of Record's TXID of " + node1_name + ": " + '['+ file1_list[0][3][1] + "," +
+                   file1_list[-1][3][1] + ']')
+
+    result.append("The length of Record of " + node2_name + ": " + str(len2))
+    result.append("The range of Record's TXID of " + node2_name + ":" + '[' + file2_list[0][3][1] + "," +
+                   file2_list[-1][3][1] + ']')
+
+    result.append("The length of Record of " + node3_name + ": " + str(len3))
+    result.append("The range of Record's TXID of " + node3_name + ":" + '['+ file3_list[0][3][1] + "," +
+                   file3_list[-1][3][1] + ']')
 
 
-    print(result)
+    for l in result:
+        print(l)
     # now = time.strftime("%m_%d_%H_%M_%S")
     # write_file(node1_name, node2_name, now, result)

@@ -111,7 +111,7 @@ def str_xml_list(xml_list):
             else:
                 return xml_list[0]
         else:
-            return "**error**: List is NULL"
+            return "【error】: List is NULL"
 
 
 def compare_list_diff(list1,list2,diff_position,txid,ret_list):
@@ -142,6 +142,7 @@ def compare_list_diff(list1,list2,diff_position,txid,ret_list):
             ret_list.append(output)
     except:
         print(" From compare_list Except......")
+        print('<TXID>' + str(txid))
         print(list1)
         print(list2)
 
@@ -170,11 +171,12 @@ def compare_list_same(list1,list2,same_position,txid,ret_list):
             ret_list.append(output)
     except:
         print(" From compare_list Except......")
+        print('<TXID>' + str(txid))
         print(list1)
         print(list2)
 
 def record_len_not_equal_handler(txid):
-    s = "\n<TXID>" + str(txid) + '\n' + "\n**  error**: The record length is not equal!"
+    s = "\n<TXID>" + str(txid) + '\n' + "\n【error】: The record length is not equal!"
     return s
 
 
@@ -218,7 +220,7 @@ def compare_record(record_list1, record_list2, txid,To_see_record_same):
 
                     else:
                         # severe error: the tag is not the same on same number of lines
-                        ret_list.append(["\n  **error**: Tag Not The Same!"])
+                        ret_list.append(["\n  【error】: Tag Not The Same!"])
                         tmp = "     (Line Number: " + str(record_list1[i][2]) + ') (' + node1_name + ') '
                         tmp += str_xml_list(record_list1[i])[3:]
                         # ret_list.append(tmp)
@@ -236,7 +238,7 @@ def compare_record(record_list1, record_list2, txid,To_see_record_same):
 
                     else:
                         # severe error: the tag is not the same on same number of lines
-                        ret_list.append(["\n  **error**: Tag Not The Same!"])
+                        ret_list.append(["\n【error】: Tag Not The Same!"])
                         tmp = "     (Line Number: " + str(record_list1[i][2]) + ') (' + node1_name + ') '
                         tmp += str_xml_list(record_list1[i])[3:]
                         # ret_list.append(tmp)
@@ -266,7 +268,7 @@ def write_file(node1, node2, now, result):
     Result: a list starts with the TXID
             Format: [ <int>, <list>[ ],<list>[ ] ]
     """
-    fp = open(node1 + "_VS._" + node2 + "_time_" + now + ".txt", 'w+')
+    fp = open(node1 + "_VS._" + node2 + "_Time_" + now + ".txt", 'w+')
 
     int_type = type(int(1))
     list_type = type(list())
@@ -321,22 +323,25 @@ if __name__ == '__main__':
     password = '111111'
     port = 22
     ssh.get3str(ip1,ip2,ip3, username, password, port)
-    node1_name = input("node1:")  # file1
-    node2_name = input("node2:")  # file2
+    node1_name = input("node1:[NN41/NN42/NN44]? ")  # file1
+    node2_name = input("node2:[NN41/NN42/NN44]? ")  # file2
 
+    # file1 = "nn1_41.xml"
+    # file2 = "nn2_42.xml"
+    # file3 = "nn3_44.xml"
     if node1_name == "NN41":
-        file1 = "/home/a.xml"
+        file1 = "/home/weijin/nn1_41.xml"
     elif node1_name == "NN42":
-        file1 = "/home/b.xml"
+        file1 = "/home/weijin/nn2_42.xml"
     elif node1_name == "NN44":
-        file1 = "/home/c.xml"
+        file1 = "/home/weijin/nn3_44.xml"
 
     if node2_name == "NN41":
-        file2 = "/home/a.xml"
+        file2 = "/home/weijin/nn1_41.xml"
     elif node2_name == "NN42":
-        file2 = "/home/b.xml"
+        file2 = "/home/weijin/nn2_42.xml"
     elif node2_name == "NN44":
-        file2 = "/home/c.xml"
+        file2 = "/home/weijin/nn3_44.xml"
 
     To_see_record_same = input("Do you want to see the same Tags? [y/n]")
 
@@ -405,5 +410,5 @@ if __name__ == '__main__':
     # print(result)
     now = time.strftime("%m_%d_%H_%M_%S")
     write_file(node1_name, node2_name, now, result)
-
+    print("Output_File ="+node1_name + "_Vs._" + node2_name + "_Time_" + now + ".txt")
 
