@@ -313,8 +313,6 @@ def compare_files_by_records(file1_list, file2_list):
     """
     Compare two files of format： list[ record_list [ str_list ] ]
     """
-
-
 if __name__ == '__main__':
     ip1 = '192.168.0.41'
     ip2 = '192.168.0.42'
@@ -324,29 +322,40 @@ if __name__ == '__main__':
     port = 22
     ssh.get3str(ip1,ip2,ip3, username, password, port)
     node1_name = input("node1:[NN41/NN42/NN44]? ")  # file1
+    # In case the wrong input
+    while (True):
+        if (node1_name == "NN41"):
+            file1 = "/home/weijin/nn1_41.xml"
+            break
+        elif (node1_name == "NN42"):
+            file1 = "/home/weijin/nn2_42.xml"
+            break
+        elif (node1_name == "NN44"):
+            file1 = "/home/weijin/nn3_44.xml"
+            break
+        else:
+            node1_name = input("node1:[NN41/NN42/NN44]? ")
+            continue
+
     node2_name = input("node2:[NN41/NN42/NN44]? ")  # file2
-
-    # file1 = "nn1_41.xml"
-    # file2 = "nn2_42.xml"
-    # file3 = "nn3_44.xml"
-    if node1_name == "NN41":
-        file1 = "/home/weijin/nn1_41.xml"
-    elif node1_name == "NN42":
-        file1 = "/home/weijin/nn2_42.xml"
-    elif node1_name == "NN44":
-        file1 = "/home/weijin/nn3_44.xml"
-
-    if node2_name == "NN41":
-        file2 = "/home/weijin/nn1_41.xml"
-    elif node2_name == "NN42":
-        file2 = "/home/weijin/nn2_42.xml"
-    elif node2_name == "NN44":
-        file2 = "/home/weijin/nn3_44.xml"
+    # In case the wrong input
+    while (True):
+        if (node2_name == "NN41"):
+            file2 = "/home/weijin/nn1_41.xml"
+            break
+        elif (node2_name == "NN42"):
+            file2 = "/home/weijin/nn2_42.xml"
+            break
+        elif (node2_name == "NN44"):
+            file2 = "/home/weijin/nn3_44.xml"
+            break
+        else:
+            node2_name = input("node2:[NN41/NN42/NN44]? ")
+            continue
 
     To_see_record_same = input("Do you want to see the same Tags? [y/n]")
 
     file1_list = getXmlData(file1)
-
     file2_list = getXmlData(file2)
 
     result = list()
