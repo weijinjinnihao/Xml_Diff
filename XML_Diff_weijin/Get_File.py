@@ -24,12 +24,12 @@ def run(interval, ip1,ip2,ip3, username, password, port):
 #     interval = 5
 #     command = r"ls"
 #     run(interval, command)
-if __name__ == '__main__':
-    ip1 = '192.168.0.41'
-    ip2 = '192.168.0.42'
-    ip3 = '192.168.0.44'
-    username = 'root'
-    password = '111111'
-    port = 22
-    interval = 5
-    run(interval,ip1,ip2,ip3, username, password, port)
+# if __name__ == '__main__':
+#     ip1 = '192.168.0.41'
+#     ip2 = '192.168.0.42'
+#     ip3 = '192.168.0.44'
+#     username = 'root'
+#     password = '111111'
+#     port = 22
+#     interval = 5
+#     run(interval,ip1,ip2,ip3, username, password, port)

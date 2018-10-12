@@ -171,14 +171,11 @@ if __name__ == '__main__':
 
 
     result.append("The length of Record of " + node1_name + ": " + str(len1))
-
     result.append("The range of Record's TXID of " + node1_name + ": " + '['+ file1_list[0][3][1] + "," +
                    file1_list[-1][3][1] + ']')
-
     result.append("The length of Record of " + node2_name + ": " + str(len2))
     result.append("The range of Record's TXID of " + node2_name + ":" + '[' + file2_list[0][3][1] + "," +
                    file2_list[-1][3][1] + ']')
-
     result.append("The length of Record of " + node3_name + ": " + str(len3))
     result.append("The range of Record's TXID of " + node3_name + ":" + '['+ file3_list[0][3][1] + "," +
                    file3_list[-1][3][1] + ']')

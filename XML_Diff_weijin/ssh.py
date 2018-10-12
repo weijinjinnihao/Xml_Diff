@@ -4,8 +4,6 @@ import re,os
 import os.path
 import xml.etree.ElementTree as ET
 
-
-
 def getTagvalue (xmlpath ,tagname ):
     array=[]
     tree = ET.ElementTree(file=xmlpath)
@@ -34,20 +32,24 @@ def readXml(xmlpath):
 
 def parseToXML(path,dstpath):
     os.system("hdfs oev -i "+path+" -o "+ dstpath)
+
 def downloadFile(ip,srcpath,username,password,port,localpath,name):
     scp = paramiko.Transport((ip,port))
     scp.connect(username=username,password=password)
     sftp=paramiko.SFTPClient.from_transport(scp)
     sftp.get(srcpath,os.path.join(localpath,name))
     scp.close()
+
 def getarray(ip, str2,username,password, port,path,localpath ,destpath,name):
     downloadFile(ip, str2,username, password, port, localpath,name)
     parseToXML(path, destpath)
     return readXml(destpath)
+
 def getname(ip,shell,username,password,port,n):
     n = execs(ip, "find / -name edits_inprogress_*", username, password, port)
     array = n.split("/")
     return n,array[len(array) - 1]
+
 def get3str(ip1,ip2,ip3, username, password, port):
     n1=""
     n2=""

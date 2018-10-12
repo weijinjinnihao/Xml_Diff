@@ -3,8 +3,9 @@ import time, threading
 import re, os
 import os.path
 import xml.etree.ElementTree as ET
+import time
 
-
+# get .xml file
 def getTagvalue(xmlpath, tagname):
     array = []
     tree = ET.ElementTree(file=xmlpath)
@@ -35,10 +36,12 @@ def readXml(xmlpath):
     return array
 
 
-def parseToXML(path, dstpath):
-    os.system("hdfs oev -i " + path + " -o " + dstpath)
+# parse local_log_file in localpath to .xml, put them in xml_path
+def parseToXML(local_log_file, xml_path):
+    os.system("hdfs oev -i " + local_log_file + " -o " + xml_path)
 
 
+# download log to localpath
 def downloadFile(ip, srcpath, username, password, port, localpath, name):
     scp = paramiko.Transport((ip, port))
     scp.connect(username=username, password=password)
@@ -47,10 +50,10 @@ def downloadFile(ip, srcpath, username, password, port, localpath, name):
     scp.close()
 
 
-def getarray(ip, string, username, password, port, path, localpath, destpath, name):
+def getarray(ip, string, username, password, port, local_log_file, localpath, xml_path, name):
     downloadFile(ip, string, username, password, port, localpath, name)
-    parseToXML(path, destpath)
-    return readXml(destpath)
+    parseToXML(local_log_file, xml_path)
+    return readXml(xml_path)
 
 
 def getname(ip, shell, username, password, port):
@@ -60,61 +63,53 @@ def getname(ip, shell, username, password, port):
 def get_str(ip, username, password, port):
     n=[]
     name=[]
-    path=[]
+    local_log_file=[]
     string=[]
-    destpath=["/home/a.xml","/home/b.xml","/home/c.xml"]
+    xml_path=["/home/weijin_1/nn1_41.xml","/home/weijin_1/nn2_42.xml","/home/weijin_1/nn3_44.xml"]
+    localpath=["/home/weijin_1/nn1_41/","/home/weijin_1/nn2_42/","/home/weijin_1/nn3_44/"]
     for i in range(len(ip)):
         n.append(getname(ip[i],"find / -name edits_inprogress_*", username, password, port))
     for l in (n):
         array=l.split("/")
         name.append(array[len(array) - 1])
     for i in range(len(n)):
-        path.append("/home/path" + name[i])
-        string.append(getarray(ip[i], n[i], username, password, port, path[i], "/home/a/", destpath[i], name[i]))
-    for l in n:
-        print(l)
-
-#     path1 = "/home/a/" + name1
-#     destpath1 = "/home/a.xml"
-#     path2 = "/home/b/" + name2
-#     destpath2 = "/home/b.xml"
-#     path3 = "/home/c/" + name3
-#     destpath3 = "/home/c.xml"
-#     str1 = getarray(ip1, n1, username, password, port, path1, "/home/a/", destpath1, name1)
-#     str2 = getarray(ip2, n2, username, password, port, path2, "/home/b/", destpath2, name2)
-#     str3 = getarray(ip3, n3, username, password, port, path3, "/home/c/", destpath3, name3)
-
-if __name__ == '__main__':
-    ip1 = '192.168.0.41'
-    ip2 = '192.168.0.42'
-    ip3 = '192.168.0.44'
-
-
-    username = 'root'
-    password = '111111'
-    port = 22
-    ip=[]
-    get_ip=input("Which ip?:")
-    get_ip =get_ip.split(",")
-    print(len(get_ip))
-    for l in get_ip:
-        if (l=="ip1"):
-            ip.append(ip1)
-        if (l=="ip2"):
-            ip.append(ip2)
-        if (l=="ip3"):
-            ip.append(ip3)
-    for i in range(len(ip)):
-        print(ip[i])
-
-    # path=[]
-    # destpath = ["/home/a.xml", "/home/b.xml", "/home/c.xml"]
-    #
-    # for i in range(len(ip)):
-    #     path.append("/home/path")
-    #     # str[i] = getarray(ip[i], n[i], username, password, port, path[i], "/home/a/", destpath[i], name[i])
-    # for l in path:
+        local_log_file.append(localpath[i] + name[i])
+        string.append(getarray(ip[i], n[i], username, password, port, local_log_file[i], localpath[i], xml_path[i], name[i]))
+    # for l in n:
     #     print(l)
-    get_str(ip, username, password, port)
+
+#     local_log_file1 = "/home/a/" + name1
+#     xml_path1 = "/home/a.xml"
+#     local_log_file2 = "/home/b/" + name2
+#     xml_path2 = "/home/b.xml"
+#     local_log_file3 = "/home/c/" + name3
+#     xml_path3 = "/home/c.xml"
+#     str1 = getarray(ip1, n1, username, password, port, local_log_file1, "/home/weijin_1/nn1_41/", xml_path1, name1)
+#     str2 = getarray(ip2, n2, username, password, port, local_log_file2, "/home/weijin_1/nn2_42/", xml_path2, name2)
+#     str3 = getarray(ip3, n3, username, password, port, local_log_file3, "/home/weijin_1/nn3_44/", xml_path3, name3)
+
+# if __name__ == '__main__':
+#     ip1 = '192.168.0.41'
+#     ip2 = '192.168.0.42'
+#     ip3 = '192.168.0.44'
+#     username = 'root'
+#     password = '111111'
+#     port = 22
+#     ip=[]
+#     get_ip=input("Which ip?:[ip1/ip2/ip3?]")
+#     get_ip =get_ip.split(",")
+#     print(len(get_ip))
+#     for l in get_ip:
+#         if (l=="ip1"):
+#             ip.append(ip1)
+#         if (l=="ip2"):
+#             ip.append(ip2)
+#         if (l=="ip3"):
+#             ip.append(ip3)
+#     for i in range(len(ip)):
+#         print(ip[i])
+
+
+#   get_str(ip, username, password, port)
 
 
